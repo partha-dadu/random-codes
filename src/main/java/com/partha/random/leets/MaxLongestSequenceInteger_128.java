@@ -1,9 +1,10 @@
 package com.partha.random.leets;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class MaxLongestSequenceInteger_128 {
+public class MaxLongestSequenceInteger_128 implements Serializable {
 
 
     /**
