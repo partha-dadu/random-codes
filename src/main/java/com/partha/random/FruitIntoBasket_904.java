@@ -3,7 +3,7 @@ package com.partha.random;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FruitIntoBasket {
+public class FruitIntoBasket_904 {
 
     /**
      * Input: fruits = [1,2,3,2,2]
@@ -12,9 +12,9 @@ public class FruitIntoBasket {
      * If we had started at the first tree, we would only pick from trees [1,2].
      * */
     public static void main(String[] args) {
-        FruitIntoBasket fruitIntoBasket = new FruitIntoBasket();
+        FruitIntoBasket_904 fruitIntoBasket904 = new FruitIntoBasket_904();
         int[] fruits = {3,3,3,1,2,1,1,2,3,3,4};
-        int result = fruitIntoBasket.getFruitsIntoBasket(fruits, 2);
+        int result = fruitIntoBasket904.getFruitsIntoBasket(fruits, 2);
         System.out.println("Results "+result);
     }
 

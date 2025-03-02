@@ -3,9 +3,9 @@ package com.partha.random.matrix;
 public class SetMatrixZero_73 {
 
     public static void main(String[] args) {
-        int[][] matrix = {{1,1,1},{1,0,1},{1,1,1}};
+        int[][] matrix = {{1,1,1,1},{1,0,1,1},{1,1,0,1},{0,1,1,1}};
         SetMatrixZero_73 setMatrixZero73 = new SetMatrixZero_73();
-        setMatrixZero73.setMatrixZeroOptimal(matrix);
+        setMatrixZero73.setMatrixZeroOptimal_practice(matrix);
         for(int[] row : matrix){
             for(int element : row){
                 System.out.print(element + " \t");
@@ -112,6 +112,65 @@ public class SetMatrixZero_73 {
         }
         if(col0 == 0){
             for(int i =0; i < matrix.length; i++) matrix[i][0] = 0;
+        }
+    }
+
+    public void setMatrixZeroBetter_practice(int[][] matrix){
+        if(matrix.length == 0 || matrix[0].length == 0) return;
+        int[] mRows = new int[matrix.length];
+        int[] nColumns = new int[matrix[0].length];
+
+        for (int row = 0; row < matrix.length; row++) {
+            for (int col = 0; col < matrix[row].length; col++) {
+                if (matrix[row][col] == 0) {
+                    mRows[row] = -1;
+                    nColumns[col] = -1;
+                }
+            }
+        }
+
+        for (int row = 0; row < matrix.length; row++) {
+            for (int col = 0; col < matrix[row].length; col++) {
+                if(mRows[row] == -1 || nColumns[col] == -1){
+                    matrix[row][col] = 0;
+                }
+            }
+        }
+    }
+
+    public void setMatrixZeroOptimal_practice(int[][] matrix){
+        if(matrix.length == 0 || matrix[0].length == 0) return;
+        int row0 = 1;
+        for(int row = 0; row < matrix.length; row++){
+            for (int col = 0; col < matrix[row].length; col++) {
+                if (matrix[row][col] == 0) {
+                    if(row == 0){
+                        row0 = 0;
+                    }else{
+                        matrix[0][col] = 0;
+                        matrix[row][0] = 0;
+                    }
+                }
+            }
+        }
+
+        for(int row = 1; row < matrix.length; row++){
+            for (int col = 1; col < matrix[row].length; col++) {
+                if (matrix[row][0] == 0 || matrix[0][col] == 0) {
+                    matrix[row][col] = 0;
+                }
+            }
+        }
+        if(matrix[0][0] == 0){
+            for(int i = 0 ; i < matrix.length ; i ++){
+                matrix[i][0] = 0;
+            }
+        }
+
+        if(row0 == 0){
+            for(int i = 0 ; i < matrix[0].length ; i ++){
+                matrix[0][i] = 0;
+            }
         }
     }
 }
