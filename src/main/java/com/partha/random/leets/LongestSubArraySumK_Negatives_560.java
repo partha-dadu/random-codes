@@ -22,7 +22,7 @@ public class LongestSubArraySumK_Negatives_560 {
       int n = nums.length;
       Map<Integer, Integer> map = new HashMap<>();
       int sum = 0;
-      int result = -1;
+      int result = Integer.MIN_VALUE;
       for(int i = 0; i < n; i++) {
           sum += nums[i];
           if(sum == k){
