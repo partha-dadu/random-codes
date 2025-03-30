@@ -69,8 +69,8 @@ public class SchoolStudent implements Student
     @Override
     public Student getStudent(String name, String rollNumber, int age) {
         StudentBuilder studentBuilder = new StudentBuilder()
-                .setStudentName(name).setStudentID(rollNumber).setStudentAge(age).build();
-        return new SchoolStudent(studentBuilder);
+                .setStudentName(name).setStudentID(rollNumber).setStudentAge(age);
+        return studentBuilder.build();
     }
 }
 

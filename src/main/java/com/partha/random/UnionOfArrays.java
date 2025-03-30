@@ -15,6 +15,7 @@ public class UnionOfArrays {
     public static void main(String[] args) {
         int[] first = {1,2,3,6,7,8,9};
         int[] second = {2,4,7,9};
+        Arrays.asList(first);
         UnionOfArrays unionOfArrays = new UnionOfArrays();
         int[] result = (unionOfArrays.unionOfArrays(first,second));
         int i = 0;

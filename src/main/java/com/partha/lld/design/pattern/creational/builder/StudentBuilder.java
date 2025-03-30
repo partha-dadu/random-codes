@@ -57,7 +57,7 @@ public class StudentBuilder {
         this.studentSchool = studentSchool;
         return this;
     }
-    public StudentBuilder build() {
-        return this;
+    public SchoolStudent build() {
+        return new SchoolStudent(this);
     }
 }
