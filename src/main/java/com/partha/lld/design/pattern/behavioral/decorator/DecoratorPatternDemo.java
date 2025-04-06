@@ -1,4 +1,4 @@
-package com.partha.lld.design.pattern.behavioral;
+package com.partha.lld.design.pattern.behavioral.decorator;
 
 public class DecoratorPatternDemo {
     public static void main(String[] args) {

@@ -23,6 +23,7 @@ public class Print1ToNReverse {
         if(input > 10){
             return;
         }
+        System.out.println("before value "+ input);
         print1ToNReversalWay2(input+1);
         System.out.println("Current value "+ input);
     }

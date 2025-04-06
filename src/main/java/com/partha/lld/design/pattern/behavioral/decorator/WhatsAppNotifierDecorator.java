@@ -1,4 +1,4 @@
-package com.partha.lld.design.pattern.behavioral;
+package com.partha.lld.design.pattern.behavioral.decorator;
 
 public class WhatsAppNotifierDecorator extends BaseNotifierDecorator {
 
