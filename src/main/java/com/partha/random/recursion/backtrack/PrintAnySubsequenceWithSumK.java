@@ -11,6 +11,7 @@ public class PrintAnySubsequenceWithSumK {
                 result.forEach(e -> System.out.print(" "+e));
                 return true;
             }
+            return false;
         }
         result.add(arr[index]);
         if(findAnySubSequenceSumK(arr, index+1, target, result) == true){
