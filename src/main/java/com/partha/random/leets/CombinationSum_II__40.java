@@ -46,13 +46,6 @@ public class CombinationSum_II__40 {
             result.add(new ArrayList<>(currentCombination));
         }
 
-        if(index >= candidates.length){
-            if(currentSum == target){
-                result.add(new ArrayList<>(currentSum));
-            }
-            return;
-        }
-
         for(int start = index; start < candidates.length; start++){
             if(start > index && candidates[start] == candidates[start-1]){
                 continue;
