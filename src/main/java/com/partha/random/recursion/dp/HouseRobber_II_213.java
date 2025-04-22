@@ -40,6 +40,11 @@ public class HouseRobber_II_213 {
         int left = obj.rob(firstIncluded);
         int right = obj.rob(lastIncluded);
         int result = Math.max(left, right);
+        if(nums.length >= 2) {
+            result = Math.max(left, right);
+        }else if(nums.length == 1){
+            result = nums[0];
+        }
         System.out.println("Result "+result);
     }
 
