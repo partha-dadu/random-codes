@@ -35,7 +35,16 @@ public class FrogJump_403 {
         int[] stones = {0,1,3,5,6,8,12,17};
 //        boolean result = obj.canCross2(stones, 1, 1);
         Map<Tuple<Integer> , Boolean> map = new HashMap<>();
-        boolean result = obj.canCross4(stones,0,1, map);
+        int maxIntuitiveK = Integer.MIN_VALUE;
+        for (int i = 0; i < stones.length; i++) {
+            maxIntuitiveK = Math.max(maxIntuitiveK, stones[i]);
+        }
+        int[][] intuitiveMemoization = new int[stones.length][maxIntuitiveK + 1];
+        for( int[] each : intuitiveMemoization) {
+            Arrays.fill(each, -1);
+        }
+//        boolean result = obj.canCross4(stones,0,1, map);
+        boolean result = obj.callCanCross2(stones,0,0);
         System.out.println("result "+ result);
     }
 
@@ -56,9 +65,20 @@ public class FrogJump_403 {
 
     }
 
-    public boolean canCross2(int[] stones, int currentIndex,int prevValue){
+    public boolean callCanCross2(int[] stones, int currentIndex,int prevValue) {
+        Map<Integer, HashMap<Integer, Integer>> map = new HashMap<>();
+        return canCross2(stones, currentIndex, prevValue, map);
+    }
+
+    public boolean canCross2(int[] stones, int currentIndex,int prevValue,Map<Integer, HashMap<Integer, Integer>> map){
         if(currentIndex == stones.length-1){
             return true;
+        }
+
+        if(map.get(currentIndex) != null){
+            if(map.get(currentIndex).containsKey(prevValue)){
+                return map.get(currentIndex).get(prevValue)==1;
+            }
         }
 
         int currentDifference = stones[currentIndex+1] - stones[currentIndex];
@@ -67,8 +87,11 @@ public class FrogJump_403 {
             while(j < 3) {
                 if (currentIndex+j < stones.length && stones[currentIndex] + i == stones[currentIndex + j]) {
                     boolean result = false;
-                    result = canCross2(stones, currentIndex + j, i);
+                    result = canCross2(stones, currentIndex + j, i, map);
                     if (result) {
+                        HashMap<Integer, Integer> temp = new HashMap<>();
+                        temp.put(stones[currentIndex] + i, 1);
+                        map.put(currentIndex,temp);
                         return true;
                     }
                 }
@@ -154,5 +177,56 @@ public class FrogJump_403 {
     }
 
 
+    public boolean canCrossIntuitive(int[] stones, int currentIndex, int prevValue, int[][] dp){
+        if(currentIndex == stones.length-1){
+            return true;
+        }
+        if(dp[currentIndex][prevValue] != -1){
+            return dp[currentIndex][prevValue] == 1;
+        }
+        boolean firstPath,secondPath,thirdPath;
+        firstPath = secondPath=thirdPath=false;
+        int j =1;
+        while (j <4){
+            if(currentIndex+j < stones.length && stones[currentIndex]+prevValue-1 == stones[currentIndex+j]){
+                firstPath = canCrossIntuitive(stones, currentIndex+j, prevValue-1, dp);
+            }
+            j++;
+        }
+        j=1;
+        while (j <4){
+            if(currentIndex+j < stones.length && stones[currentIndex]+prevValue == stones[currentIndex+j]){
+                secondPath = canCrossIntuitive(stones, currentIndex+j, prevValue, dp);
+            }
+            j++;
+        }
+        j=1;
+        while (j <4){
+            if(currentIndex+j < stones.length && stones[currentIndex]+prevValue+1 == stones[currentIndex+j]){
+                thirdPath = canCrossIntuitive(stones, currentIndex+j, prevValue+1, dp);
+            }
+            j++;
+        }
+        boolean result =  firstPath | secondPath | thirdPath;
+        if(result){
+            dp[currentIndex][prevValue] = 1;
+        }else {
+            dp[currentIndex][prevValue] = 0;
+        }
+        return dp[currentIndex][prevValue] == 1;
+    }
+
+    private boolean canJump(int[] stones, int currentIndex, int prevValue){
+        for( int i = prevValue-1; i <= prevValue+1; i++){
+            int j=1;
+            while (j <4){
+                if(currentIndex+j < stones.length && stones[currentIndex]+i == stones[currentIndex+j]){
+                    return true;
+                }
+                j++;
+            }
+        }
+        return false;
+    }
 
 }
