@@ -17,17 +17,29 @@ public class SubSet_Sum_K_GFG {
 
     public static void main(String[] args) {
         SubSet_Sum_K_GFG s = new SubSet_Sum_K_GFG();
-        int[] nums = {3, 34, 4, 12, 5, 2, 2};
         List<Integer> stack = new ArrayList<>();
-        int result = s.countSubarraySum(nums, 0, 11, stack);
+        int[] nums = {3, 34, 4, 12, 5, 2, 2};
+        int[] gfg = {0,10,0};
+        int result = s.countSubarraySum(gfg, 0, 10, stack);
+        boolean possible = s.isSubsetSumExist(nums, 19, 0);
         System.out.println(result);
+        System.out.println(possible);
     }
 
     public int countSubarraySum(int[] nums, int index, int target, List<Integer> stack) {
-        if (target == 0) {
-            System.out.println(stack);
+        /*if(index == nums.length-1 && target == nums[index]) {
+            return 1;
+        }*/
+
+        if(index == nums.length && target == 0) {
             return 1;
         }
+
+//        if (target == 0) {
+//            System.out.println(stack);
+//            return 1;
+//        }
+
         if (index == nums.length) {
             return 0;
         }
@@ -40,5 +52,24 @@ public class SubSet_Sum_K_GFG {
             stack.remove(stack.size()-1);
         }
         return take+notTake;
+    }
+
+    public boolean isSubsetSumExist(int[] nums, int target, int index){
+        if(target == 0){
+            return true;
+        }
+        if(index == nums.length-1 && target == nums[index] ){
+            return true;
+        }
+        if(index == nums.length){
+            return false;
+        }
+
+        boolean notTake = isSubsetSumExist(nums, target,  index+1);
+        boolean take = false;
+        if(target >= nums[index]){
+            take = isSubsetSumExist(nums, target-nums[index], index+1);
+        }
+        return notTake || take;
     }
 }
