@@ -22,9 +22,11 @@ public class FrogJump_I_GFG {
     public static void main(String[] args) {
         FrogJump_I_GFG obj = new FrogJump_I_GFG();
         int[] stones = {17 ,6 ,12 ,10 ,3 ,13 ,17 ,20 ,8};
-        int[] dp = new int[stones.length+1];
+        int[] dp = new int[stones.length];
         Arrays.fill(dp,-1);
-        int result = obj.frogJump(stones,0,dp);
+//        int result = obj.frogJump(stones,0,dp);
+//        int result = obj.frogJumpWithDistanceK(stones,0,2,dp);
+        int result = obj.frogJumpWithDistanceKTabulation(stones,0,2,dp);
         System.out.println("Result "+result);
     }
 
@@ -46,5 +48,44 @@ public class FrogJump_I_GFG {
         }
         dp[index] = Math.min(differece2,difference1);
         return dp[index];
+    }
+
+    public int frogJumpWithDistanceK(int[] stones, int index, int k, int[] dp){
+        if(index >= stones.length-1){
+            return 0;
+        }
+        if(dp[index] != -1){
+            return dp[index];
+        }
+
+        int minEnergyConsumed = Integer.MAX_VALUE;
+
+        for(int j =1; j <= k; j++){
+            if(index+j < stones.length){
+                int energyConsumed = Math.abs(stones[index] - stones[index+j]);
+                int result = energyConsumed + frogJumpWithDistanceK(stones, index+j, k, dp);
+                minEnergyConsumed = Math.min(minEnergyConsumed, result);
+            }
+        }
+        dp[index] = minEnergyConsumed;
+        return dp[index];
+
+    }
+
+    public int frogJumpWithDistanceKTabulation(int[] stones, int index, int k, int[] dp){
+        Arrays.fill(dp,-1);
+        dp[0] = 0;
+        for(int i =1; i < stones.length; i++){
+            int minEnergyConsumed = Integer.MAX_VALUE;
+            for(int j = 1; j <= k; j++){
+                if(i - j >= 0){
+                    int energyConsumed = Math.abs(stones[i] - stones[i-j]);
+                    int result = energyConsumed + dp[i-j];
+                    minEnergyConsumed = Math.min(minEnergyConsumed, result);
+                }
+            }
+            dp[i] = minEnergyConsumed;
+        }
+        return dp[stones.length-1];
     }
 }
