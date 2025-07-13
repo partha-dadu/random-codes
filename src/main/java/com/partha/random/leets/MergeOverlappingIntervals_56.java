@@ -1,7 +1,6 @@
 package com.partha.random.leets;
 
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.*;
 
 public class MergeOverlappingIntervals_56 {
     /**
@@ -23,6 +22,24 @@ public class MergeOverlappingIntervals_56 {
         for (int[] interval : intervals) {
             System.out.println(Arrays.toString(interval));
         }
+    }
+
+    public int[][] merge(int[][] intervals) {
+
+        sortIntervals(intervals);
+
+        int[] prev = intervals[0];
+        List<int[]> result = new ArrayList<>();
+        for(int i = 1;i < intervals.length;i++){
+            if(intervals[i][0] < prev[1]){
+                prev[1] =  Math.max(intervals[i][1], prev[1]);
+            }else{
+                result.add(prev);
+                prev = intervals[i];
+            }
+        }
+        result.add(prev);
+        return result.toArray(new int[result.size()][2]);
     }
 
 
