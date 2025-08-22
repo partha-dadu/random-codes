@@ -26,7 +26,11 @@ public class PermutationsOfString_46 {
         PermutationsOfString_46 permutations = new PermutationsOfString_46();
         int[] arr = new int[]{1, 2, 3};
         List<List<Integer>> result = new ArrayList<>();
-        permutations.findPermutations(arr, result);
+        List<Integer> currentStack = new ArrayList<>();
+        int[] hash = new int[arr.length];
+        Arrays.fill(hash, 0);
+//        permutations.findPermutations(arr, result);
+        permutations.findPermutationPractice(arr, 0,currentStack, result, hash);
         for(List<Integer> list : result){
             System.out.println(Arrays.toString(list.toArray()));
         }
@@ -81,5 +85,21 @@ public class PermutationsOfString_46 {
         int temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
+    }
+
+    public void findPermutationPractice(int[] nums, int index, List<Integer> currentStack, List<List<Integer>> result, int[] hash){
+        if(index == nums.length){
+            result.add(new ArrayList<>(currentStack));
+            return;
+        }
+        for(int i =0; i<nums.length; i++){
+            if(hash[i] == 0){
+                hash[i] = 1;
+                currentStack.add(nums[i]);
+                findPermutationPractice(nums, index + 1, currentStack, result, hash);
+                currentStack.remove(currentStack.size()-1);
+                hash[i] = 0;
+            }
+        }
     }
 }

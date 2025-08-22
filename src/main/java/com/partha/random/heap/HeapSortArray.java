@@ -1,6 +1,5 @@
 package com.partha.random.heap;
 
-import java.util.Arrays;
 
 public class HeapSortArray {
 
