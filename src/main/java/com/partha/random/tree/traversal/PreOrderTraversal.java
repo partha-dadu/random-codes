@@ -10,7 +10,7 @@ public class PreOrderTraversal {
      * **/
 
     public static void main(String[] args) {
-        TreeNode root = buildTree();
+        TreeNode root = buildTree2();
         PreOrderTraversal traversal = new PreOrderTraversal();
         traversal.printPreOrder(root);
 
@@ -37,6 +37,16 @@ public class PreOrderTraversal {
         root.getRight().getRight().setLeft(new TreeNode(9));
         root.getRight().getRight().setRight(new TreeNode(10));
 
+        return  root;
+    }
+
+    static TreeNode buildTree2() {
+        TreeNode root = new TreeNode(1);
+        root.setLeft(new TreeNode(2));
+        root.setRight(new TreeNode(3));
+        root.getLeft().setLeft(new TreeNode(4));
+        root.getRight().setLeft(new TreeNode(5));
+        root.getRight().getLeft().setRight(new TreeNode(6));
         return  root;
     }
 }
