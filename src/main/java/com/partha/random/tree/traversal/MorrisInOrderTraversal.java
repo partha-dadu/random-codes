@@ -50,7 +50,7 @@ public class MorrisInOrderTraversal {
         return res;
     }
 
-    static TreeNode buildTree2() {
+    static TreeNode buildTree2() { 
         TreeNode root = new TreeNode(1);
         root.setLeft(new TreeNode(2));
         root.setRight(new TreeNode(3));
