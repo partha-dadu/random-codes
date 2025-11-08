@@ -13,7 +13,7 @@ public class MaxConsecutiveOnesWithFlip {
         int[] nums = {1,1,1,0,0,0,1,1,1,1,0};
         int k = 2;
         MaxConsecutiveOnesWithFlip maxConsecutiveOnesWithFlip = new MaxConsecutiveOnesWithFlip();
-        int result = maxConsecutiveOnesWithFlip.longestSeq(nums, k);
+        int result = maxConsecutiveOnesWithFlip.longestOnes(nums, k);
         System.out.println("result "+result);
     }
 
@@ -35,6 +35,36 @@ public class MaxConsecutiveOnesWithFlip {
             if(currentZero <= k){
                 int length = r-l+1;
                 maxLength = Math.max(maxLength, length);
+            }
+            r++;
+        }
+        return maxLength;
+    }
+
+    public int longestOnes(int[] nums, int k) {
+        int length = 0;
+        int maxLength = 0;
+        int zeroCount = 0;
+
+        int l =0;
+        int r = 0;
+        while(r < nums.length){
+            if(nums[r] == 1 && zeroCount <= k){
+                length = r-l+1;
+                maxLength = Math.max(maxLength, length);
+            }else{
+                zeroCount++;
+                if(zeroCount <= k){
+                    length = r-l+1;
+                    maxLength = Math.max(maxLength, length);
+                }else{
+                    if(nums[l] == 0){
+                        zeroCount--;
+                        l++;
+                    }else{
+                        l++;
+                    }
+                }
             }
             r++;
         }
