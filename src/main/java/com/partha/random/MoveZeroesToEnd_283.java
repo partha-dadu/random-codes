@@ -5,7 +5,7 @@ public class MoveZeroesToEnd_283 {
     public static void main(String[] args) {
         int[] nums = {0,1,0,3,12};
         MoveZeroesToEnd_283 moveZeroesToEnd283 = new MoveZeroesToEnd_283();
-        moveZeroesToEnd283.moveZeroes(nums);
+        moveZeroesToEnd283.moveZeroesPractice(nums);
         int i = 0;
         while(i < nums.length){
             System.out.println(nums[i]);
@@ -25,6 +25,22 @@ public class MoveZeroesToEnd_283 {
                 j++;
             }
             i++;
+        }
+    }
+
+    public void moveZeroesPractice(int[] nums) {
+        int i =-1;
+        int j=0;
+        while (j < nums.length){
+            if(nums[j] == 0 && i == -1){
+                i = j;
+            }
+            if(nums[j] != 0 && i != -1){
+                nums[i] = nums[j];
+                nums[j] = 0;
+                i++;
+            }
+            j++;
         }
     }
 }
