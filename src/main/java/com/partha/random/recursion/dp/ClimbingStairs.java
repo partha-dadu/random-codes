@@ -34,6 +34,17 @@ public class ClimbingStairs {
         System.out.println("Result Practice "+newResult);
     }
 
+    public int climbingStairsFresh(int n, int index, int[] dp){
+        if(index >= n){
+            return 1;
+        }
+        if(dp[index] != -1){
+            return dp[index];
+        }
+        dp[index] = climbingStairsFresh(n, index+1, dp)+climbingStairsFresh(n, index+2,dp);
+        return dp[index];
+    }
+
     public int climbStairs(int index,int target, List<Integer> currentCombination, List<List<Integer>> result, int[] dp) {
         if(index == target){
             result.add(new ArrayList<>(currentCombination));

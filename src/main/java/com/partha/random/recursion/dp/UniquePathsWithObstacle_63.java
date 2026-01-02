@@ -1,5 +1,7 @@
 package com.partha.random.recursion.dp;
 
+import java.util.Arrays;
+
 public class UniquePathsWithObstacle_63 {
 
     /**
@@ -29,6 +31,35 @@ public class UniquePathsWithObstacle_63 {
         result = obj.uniquePathsWithObstacles(obstacleGrid);
         System.out.println("Result "+ result);
     }
+
+    public int uniquePathsWithObstaclesRecursive(int[][] obstacleGrid) {
+        int[][] dp = new int[obstacleGrid.length][obstacleGrid[0].length];
+        int m = obstacleGrid.length;
+        int n = obstacleGrid[0].length;
+        for(int[] row : dp){
+            Arrays.fill(row,-1);
+        }
+        return findUniquePathsWithObstaclesFresh(obstacleGrid, m, n, 0, 0, dp);
+    }
+
+    public int findUniquePathsWithObstaclesFresh(int[][] obstacleGrid,int m, int n, int row, int col, int[][] dp) {
+
+        if(row >= m || col >= n){
+            return 0;
+        }
+        if(obstacleGrid[row][col] == 1){
+            return 0;
+        }
+        if(row == m-1 && col == n-1){
+            return 1;
+        }
+        if(dp[row][col] != -1){
+            return dp[row][col];
+        }
+        dp[row][col] = findUniquePathsWithObstaclesFresh(obstacleGrid, m, n, row+1, col, dp) + findUniquePathsWithObstaclesFresh(obstacleGrid, m, n, row, col+1, dp);
+        return dp[row][col];
+    }
+
 
     public int uniquePathsWithObstacles(int[][] obstacleGrid) {
         int[][] dp = new int[obstacleGrid.length][obstacleGrid[0].length];

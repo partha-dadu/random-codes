@@ -33,6 +33,26 @@ public class GridUniquePaths_62 {
         return findUniquePaths(m, n, 0, 0, dp);
     }
 
+    public int gridUniquePathsCaller(int m, int n) {
+        int[][] dp = new int[m][n];
+        return gridUniquePathsFresh(m, n, 0, 0, dp);
+    }
+
+    public int gridUniquePathsFresh(int m, int n, int row, int col, int[][] dp) {
+        if(row == m-1 && col == n-1){
+            return 1;
+        }
+        if(row >= m || col >= n){
+            return 0;
+        }
+        if(dp[row][col] != 0){
+            return dp[row][col];
+        }
+
+        dp[row][col] = gridUniquePathsFresh(m, n, row+1,col, dp) +  gridUniquePathsFresh(m, n, row,col+1, dp);
+        return dp[row][col];
+    }
+
     public int findUniquePaths(int m, int n, int row, int col, int[][] dp) {
         if(row == m-1 && col == n-1){
             return 1;

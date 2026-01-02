@@ -7,6 +7,8 @@ public class StringReversal {
         String test = "Hello";
         char[] chars = test.toCharArray();
         stringReversal.reverseString(chars,0);
+        stringReversal.reverseCaller(test);
+        System.out.println("Testing recursive fresh -> "+stringReversal.reverseCaller(test));
         System.out.println("String");
         for(int i = 0; i < chars.length; i++){
             System.out.print(chars[i]+" ");
@@ -14,6 +16,28 @@ public class StringReversal {
         String palindromeTest = "MADAM";
         System.out.println();
         System.out.println("Is Palindrome "+ stringReversal.isPalindrome(palindromeTest,0));
+    }
+
+    public String reverseCaller(String str){
+        char[] chars = str.toCharArray();
+        return String.valueOf(reverseStringRecursiveIteration(str, chars, 0));
+    }
+
+    public char[] reverseStringRecursiveIteration(String str, char[] chars, int start){
+        if(start == str.length()){
+            return chars;
+        }
+        chars[start] = str.charAt(str.length()-start-1);
+        return reverseStringRecursiveIteration(str, chars, start + 1);
+    }
+
+    public String reverseRecursively(String s, int index) {
+        if (index == s.length()) {
+            return "";
+        }
+
+        String reversedSuffix = reverseRecursively(s, index + 1);
+        return reversedSuffix + s.charAt(index);
     }
 
  public void reverseString(char[] s, int index) {

@@ -37,7 +37,23 @@ public class MinimumPathSum_64 {
         for(int[] row : dp){
             Arrays.fill(row, -1);
         }
-        return minPathSumRecursive(grid, 0, 0, dp);
+        return findMinPathSumRecursive(grid, 0, 0, dp);
+    }
+
+    public int findMinPathSumRecursive(int[][] grid, int row, int col, int[][] dp){
+        if(row == grid.length-1 && col == grid[0].length-1){
+            return grid[row][col];
+        }
+        if(row >= grid.length || col >= grid[0].length){
+            return Integer.MAX_VALUE / 2; //0 <= grid[i][j] <= 200
+        }
+        if(dp[row][col] != -1){
+            return dp[row][col];
+        }
+        int downSum = grid[row][col] + findMinPathSumRecursive(grid, row+1, col,dp);
+        int rightSum = grid[row][col] + findMinPathSumRecursive(grid, row, col+1, dp);
+        dp[row][col] = Math.min(downSum, rightSum);
+        return dp[row][col];
     }
 
     public int minPathSumRecursive(int[][] grid, int m, int n, int[][] dp){
